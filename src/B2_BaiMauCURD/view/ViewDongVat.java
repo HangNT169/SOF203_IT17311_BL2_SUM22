@@ -5,6 +5,7 @@
 package B2_BaiMauCURD.view;
 
 import B2_BaiMauCURD.model.DongVat;
+import B2_BaiMauCURD.service.DongVatService;
 import B2_BaiMauCURD.service.impl.DongVatServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,7 @@ public class ViewDongVat extends javax.swing.JFrame {
     private DefaultTableModel dtm;
     private List<DongVat> lists;
     private DongVatServiceImpl dvService;
+    private DongVatService service = new DongVatServiceImpl();
     
     /**
      * Creates new form ViewDongVat
