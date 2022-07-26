@@ -42,7 +42,7 @@ public class GiangVienRepository {
     }
 
     public GiangVien getOne(String maGV) {
-        String query = "SELECT * FROM giang_vien gv  WHERE ma_gv = ?";
+        String query = "SELECT * FROM giang_vien gv  WHERE ma_gv = ? ";
         try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, maGV);
             // Statement: Cac inteface JDBCStatement , PreparedStatement ... => Cac phuong thuc cho phep gui cac SQL toi DB 
@@ -59,11 +59,65 @@ public class GiangVienRepository {
         return null;
     }
 
-    public static void main(String[] args) {
-        List<GiangVien> lists = new GiangVienRepository().getAll();
-        for (GiangVien g : lists) {
-            System.out.println(g.toString());
+    public boolean add(GiangVien gv) {
+        String query = "INSERT INTO B7_TrenLop.dbo.giang_vien "
+                + "(ma_gv, ten_gv, tuoi, bac, loai, gioi_tinh) "
+                + "VALUES(?,?,?,?,?,?)";
+        int check = 0;
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, gv.getMaGV());
+            ps.setObject(2, gv.getTenGV());
+            ps.setObject(3, gv.getTuoi());
+            ps.setObject(4, gv.getBac());
+            ps.setObject(5, gv.getLoai());
+            ps.setObject(6, gv.isGioiTinh());
+            check = ps.executeUpdate();
+        } catch (SQLException e) { // Bat tat ca cac loi lien quan toi connect DB
+            e.printStackTrace(System.out);
         }
+        return check > 0;
+    }
+
+    public boolean delete(String maGV) {
+        String query = "DELETE FROM giang_vien "
+                + "WHERE ma_gv = ?";
+        int check = 0;
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, maGV);
+            check = ps.executeUpdate();
+        } catch (SQLException e) { // Bat tat ca cac loi lien quan toi connect DB
+            e.printStackTrace(System.out);
+        }
+        return check > 0;
+    }
+
+    public boolean update(GiangVien gv, String maGV) {
+        String query = "UPDATE B7_TrenLop.dbo.giang_vien "
+                + "SET ten_gv= ? , tuoi=?, bac=?, loai=?, gioi_tinh=? "
+                + "WHERE ma_gv= ?";
+        int check = 0;
+        try ( Connection con = SQLServerConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, gv.getTenGV());
+            ps.setObject(2, gv.getTuoi());
+            ps.setObject(3, gv.getBac());
+            ps.setObject(4, gv.getLoai());
+            ps.setObject(5, gv.isGioiTinh());
+            ps.setObject(6, maGV);
+            check = ps.executeUpdate();
+        } catch (SQLException e) { // Bat tat ca cac loi lien quan toi connect DB
+            e.printStackTrace(System.out);
+        }
+        return check > 0;
+    }
+
+    public static void main(String[] args) {
+//        List<GiangVien> lists = new GiangVienRepository().getAll();
+//        for (GiangVien g : lists) {
+//            System.out.println(g.toString());
+//        }
+        GiangVien gv = new GiangVien("ma_test_01", "ten01", 20, "5", "part_time", true);
+        boolean add = new GiangVienRepository().delete("ma_test_01");
+        System.out.println(add);
     }
 
 }
