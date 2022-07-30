@@ -2,14 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package B11_BaiMauCURD_QuanHe.view;
+package B10_BaiMauCURD_QuanHe.view;
 
-import B11_BaiMauCURD_QuanHe.model.Lop;
-import B11_BaiMauCURD_QuanHe.model.SinhVien;
-import B11_BaiMauCURD_QuanHe.service.LopService;
-import B11_BaiMauCURD_QuanHe.service.SinhVienService;
-import B11_BaiMauCURD_QuanHe.service.impl.LopServiceImpl;
-import B11_BaiMauCURD_QuanHe.service.impl.SinhVienServiceImpl;
+import B10_BaiMauCURD_QuanHe.model.Lop;
+import B10_BaiMauCURD_QuanHe.model.SinhVien;
+import B10_BaiMauCURD_QuanHe.service.LopService;
+import B10_BaiMauCURD_QuanHe.service.SinhVienService;
+import B10_BaiMauCURD_QuanHe.service.impl.LopServiceImpl;
+import B10_BaiMauCURD_QuanHe.service.impl.SinhVienServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
